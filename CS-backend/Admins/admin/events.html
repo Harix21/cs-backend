@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Events</title>
+<link rel="stylesheet" href="../css/admin.css">
+<style>
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.52);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.show{display:flex}.modal-card{width:min(760px,100%);background:#fff;border-radius:14px;padding:22px;box-shadow:0 24px 70px rgba(15,23,42,.22)}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.close-btn{border:none;background:#f3f4f6;border-radius:8px;padding:8px 12px;cursor:pointer}.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field input,.field select,.field textarea{padding:10px 12px;border:1px solid #dfe5f1;border-radius:8px;font:inherit}.field textarea{resize:vertical}.action-row{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}.primary-btn,.secondary-btn{border:none;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:600}.primary-btn{background:#0f172a;color:#fff}.secondary-btn{background:#e5e7eb;color:#111827}.warning{color:#b42318;font-weight:600}.success{color:#0f766e;font-weight:600}.info{color:#1d4ed8;font-weight:600}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar"><div class="logo"><span>CS</span><div>Cyber Sentinel<small>Admin Portal</small></div></div><nav>
+<a href="dashboard.html">Dashboard</a><a href="registrations.html">Registrations</a><a href="payments.html">Payments</a><a class="active" href="events.html">Events</a><a href="coordinators.html">Coordinators</a><a href="teams.html">Teams</a><a href="attendance.html">Attendance</a><a href="announcements.html">Announcements</a><a href="emails.html">Emails</a><a href="reports.html">Reports</a></nav><button class="logout" onclick="logout()">Sign out</button></aside>
+<main class="main">
+<header class="topbar"><div><h1>Events</h1><p>Day 1 technical and Day 2 non-technical events</p></div><button class="primary-btn" id="openEventModal">Add Event</button></header>
+<div class="panel table-wrap"><table><thead><tr><th>Code</th><th>Event</th><th>Day</th><th>Type</th><th>Team Size</th><th>Fee</th><th>Status</th><th>Details</th></tr></thead><tbody id="eventRows"></tbody></table></div>
+</main>
+</div>
+<div id="eventModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-head"><h2 style="margin:0">Add Event</h2><button type="button" class="close-btn" data-close="eventModal">Close</button></div>
+    <form id="eventForm">
+      <div class="form-grid">
+        <div class="field"><label for="eventCode">Code</label><input id="eventCode" name="code" type="text" required></div>
+        <div class="field"><label for="eventName">Event Name</label><input id="eventName" name="name" type="text" required></div>
+        <div class="field"><label for="eventDay">Day</label><select id="eventDay" name="day" required><option value="DAY_1">DAY_1</option><option value="DAY_2">DAY_2</option></select></div>
+        <div class="field"><label for="eventType">Type</label><select id="eventType" name="event_type" required><option value="INDIVIDUAL">INDIVIDUAL</option><option value="TEAM">TEAM</option></select></div>
+        <div class="field"><label for="minTeamSize">Min Team Size</label><input id="minTeamSize" name="min_team_size" type="number" min="1" value="1" required></div>
+        <div class="field"><label for="maxTeamSize">Max Team Size</label><input id="maxTeamSize" name="max_team_size" type="number" min="1" value="1" required></div>
+        <div class="field"><label for="eventVenue">Venue</label><input id="eventVenue" name="venue" type="text"></div>
+        <div class="field"><label for="eventDate">Date</label><input id="eventDate" name="event_date" type="date"></div>
+        <div class="field"><label for="startTime">Start Time</label><input id="startTime" name="start_time" type="time"></div>
+        <div class="field"><label for="endTime">End Time</label><input id="endTime" name="end_time" type="time"></div>
+        <div class="field"><label for="registrationFee">Fee</label><input id="registrationFee" name="registration_fee" type="number" min="0" step="0.01" value="0" required></div>
+        <div class="field"><label for="eventStatus">Status</label><select id="eventStatus" name="status" required><option value="ACTIVE">ACTIVE</option><option value="INACTIVE">INACTIVE</option><option value="COMPLETED">COMPLETED</option></select></div>
+        <div class="field" style="grid-column:1 / -1"><label for="eventDescription">Description</label><textarea id="eventDescription" name="description" rows="3"></textarea></div>
+      </div>
+      <div class="action-row"><button type="button" class="secondary-btn" data-close="eventModal">Cancel</button><button type="submit" class="primary-btn">Add Event</button></div>
+    </form>
+    <div id="eventMessage" class="success" style="margin-top:14px"></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/config.js"></script><script src="../js/supabase.js"></script><script src="../js/admin-auth.js"></script><script src="../js/view-details.js"></script>
+<script>
+async function loadEvents(){
+  const {data,error}=await supabaseClient.from('events').select('*').order('day').order('name');
+  const b=document.getElementById('eventRows');
+  if(error){b.innerHTML='<tr><td colspan="8">'+esc(error.message)+'</td></tr>';return;}
+  b.innerHTML=(data||[]).map(e=>{storeDetails('event',e.id,e);return '<tr><td>'+esc(e.code)+'</td><td>'+esc(e.name)+'</td><td>'+esc(e.day)+'</td><td>'+esc(e.event_type)+'</td><td>'+e.min_team_size+' - '+e.max_team_size+'</td><td>₹'+Number(e.registration_fee).toFixed(2)+'</td><td>'+esc(e.status)+'</td><td><button class="view-event" data-id="'+esc(e.id)+'">View</button></td></tr>';}).join('')||'<tr><td colspan="8">No events found.</td></tr>';
+}
+document.getElementById('eventRows').addEventListener('click',event=>{const button=event.target.closest('.view-event');if(button)viewDetails('event',button.dataset.id,'Event details');});
+function esc(v){return String(v??'').replace(/[&<>\"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function setMessage(elId,text,type='success'){const el=document.getElementById(elId);if(!el)return;el.textContent=text;el.className=type==='error'?'warning':type==='info'?'info':'success';}
+function openModal(id){document.getElementById(id).classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.getElementById('openEventModal').addEventListener('click',()=>openModal('eventModal'));
+document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>closeModal(btn.getAttribute('data-close'))));
+document.getElementById('eventForm')?.addEventListener('submit',async function(event){
+  event.preventDefault();
+  const form=event.currentTarget;
+  const fd=new FormData(form);
+  const payload={
+    code:(fd.get('code')||'').toString().trim(),
+    name:(fd.get('name')||'').toString().trim(),
+    description:(fd.get('description')||'').toString().trim() || null,
+    day:(fd.get('day')||'').toString(),
+    event_type:(fd.get('event_type')||'').toString(),
+    min_team_size:Number((fd.get('min_team_size')||1).toString() || 1),
+    max_team_size:Number((fd.get('max_team_size')||1).toString() || 1),
+    venue:(fd.get('venue')||'').toString().trim() || null,
+    event_date:(fd.get('event_date')||'').toString() || null,
+    start_time:(fd.get('start_time')||'').toString() || null,
+    end_time:(fd.get('end_time')||'').toString() || null,
+    registration_fee:Number((fd.get('registration_fee')||0).toString() || 0),
+    status:(fd.get('status')||'ACTIVE').toString()
+  };
+  if(!payload.code||!payload.name){setMessage('eventMessage','Event code and name are required.','error');return;}
+  if(payload.event_type==='INDIVIDUAL'&&(payload.min_team_size!==1||payload.max_team_size!==1)){payload.min_team_size=1;payload.max_team_size=1;}
+  if(payload.event_type==='TEAM'&&payload.max_team_size<2){setMessage('eventMessage','Team events must allow at least 2 members.','error');return;}
+  try{
+    const {error}=await supabaseClient.from('events').insert([payload]);
+    if(error) throw error;
+    form.reset();
+    closeModal('eventModal');
+    setMessage('eventMessage','Event added successfully.','success');
+    await loadEvents();
+  }catch(err){setMessage('eventMessage',err.message||'Unable to add event.','error');}
+});
+loadEvents();
+</script>
+</body><script src="../js/admin-menu.js"></script>
+</html>
