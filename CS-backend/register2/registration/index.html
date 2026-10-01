@@ -1,0 +1,35 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber Sentinel — Registration</title><link rel="stylesheet" href="../css/portal.css"></head><body>
+<header class="topbar"><div class="brand"><div class="logo">CS</div>Cyber Sentinel</div><span class="pill">Participant Registration</span></header>
+<main class="container">
+<section class="hero"><span class="pill">DAY OR SPECIAL-EVENT REGISTRATION</span><h1>Register for Cyber Sentinel</h1>
+<p>Select your symposium day, make the official UPI payment, enter the UTR and upload your payment screenshot. You receive your final QR only after payment verification.</p></section>
+<div id="alert" class="alert"></div>
+<form id="registrationForm" class="card">
+<div class="section" style="border-top:0;padding-top:0;margin-top:0"><h3>Participant Details</h3>
+<div class="grid">
+<div><label>Full Name *</label><input id="name" required></div><div><label>Email *</label><input id="email" type="email" required></div>
+<div><label>Phone Number *</label><input id="phone" inputmode="tel" required></div><div><label>College *</label><input id="college" required></div>
+<div><label>Department *</label><input id="department" required></div><div><label>Year</label><select id="year"><option value="">Select</option><option>1st Year</option><option>2nd Year</option><option>3rd Year</option><option>4th Year</option></select></div>
+</div></div>
+<div class="section"><h3>Select Registration Day</h3>
+<div class="day-grid">
+<div><input id="day1" type="radio" name="day" value="DAY_1"><label class="day-card" for="day1"><strong>Day 1</strong><small>Technical Events</small></label></div>
+<div><input id="day2" type="radio" name="day" value="DAY_2"><label class="day-card" for="day2"><strong>Day 2</strong><small>Non-Technical Events</small></label></div>
+<div><input id="both" type="radio" name="day" value="BOTH"><label class="day-card" for="both"><strong>Both Days</strong><small>Technical + Non-Technical</small></label></div>
+<div><input id="special" type="radio" name="day" value="SPECIAL"><label class="day-card" for="special"><strong>Special Events</strong><small>Premium events</small></label></div>
+</div>
+<div id="specialEvents" class="grid" hidden></div>
+<div class="summary"><div class="stat"><small>Registration Fee</small><div class="fee" id="fee">—</div></div>
+<div class="stat"><small>Payment</small><strong>Official UPI QR</strong></div><div class="stat"><small>QR</small><strong>After verification</strong></div></div></div>
+<div class="section"><h3>Payment</h3><div class="grid">
+<div><label>Official College Payment QR</label><div class="team"><p class="notice">Replace this box with your official UPI QR image.</p><div style="font-size:70px;text-align:center">▦</div></div></div>
+<div><label>UTR / Transaction ID *</label><input id="utr" required><p class="notice">Enter the exact UTR shown in your UPI/bank app.</p></div>
+<div class="full"><label>Payment Screenshot *</label><input id="paymentScreenshot" type="file" accept="image/*" required>
+<p class="notice">Maximum recommended size: 5 MB. The screenshot is stored in the private payment-screenshots bucket.</p></div>
+</div></div>
+<div class="actions"><button class="btn btn-primary" id="submitBtn">Submit Registration</button>
+<a class="btn btn-secondary" href="../checking/index.html">Already Registered? Check Status</a></div>
+</form></main><footer>Cyber Sentinel CS Symposium • Supabase-backed registration</footer>
+<script src="../js/config.js"></script><script src="../js/feedback.js"></script><script src="../js/registration.js"></script></body></html>

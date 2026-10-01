@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Payments | Cyber Sentinel</title><link rel="stylesheet" href="../css/admin.css"></head>
+<body><div class="app"><aside class="sidebar"><div class="logo"><span>CS</span><div>Cyber Sentinel<small>Admin Portal</small></div></div><nav>
+<a href="dashboard.html">Dashboard</a><a href="registrations.html">Registrations</a><a class="active" href="payments.html">Payments</a><a href="events.html">Events</a><a href="coordinators.html">Coordinators</a><a href="teams.html">Teams</a><a href="attendance.html">Attendance</a><a href="announcements.html">Announcements</a><a href="emails.html">Emails</a><a href="reports.html">Reports</a></nav><button class="logout" onclick="logout()">Sign out</button></aside>
+<main class="main"><header class="topbar"><div><h1>Payments</h1><p>Review UTR and payment proof</p></div></header>
+<div class="toolbar"><input id="paymentSearch" type="search" placeholder="Search registration, name, email, UTR..."><select id="paymentStatus"><option value="">All</option><option>UNDER_REVIEW</option><option>PENDING</option><option>VERIFIED</option><option>REJECTED</option><option>FLAGGED</option></select><button onclick="loadPayments()">Refresh</button></div>
+<div class="panel table-wrap"><table><thead><tr><th>Registration</th><th>Amount</th><th>UTR</th><th>Screenshot</th><th>Status</th><th>Action</th></tr></thead><tbody id="paymentRows"></tbody></table></div></main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../js/config.js"></script><script src="../js/supabase.js"></script><script src="../js/admin-auth.js"></script><script src="../js/view-details.js"></script><script src="../js/admin-payments.js"></script><script src="../js/admin-menu.js"></script></body></html>

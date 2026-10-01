@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard | Cyber Sentinel</title>
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo"><span>CS</span><div>Cyber Sentinel<small>Admin Portal</small></div></div>
+  <nav>
+    <a class="active" href="dashboard.html">Dashboard</a>
+    <a href="registrations.html">Registrations</a>
+    <a href="payments.html">Payments</a>
+    <a href="events.html">Events</a>
+    <a href="coordinators.html">Coordinators</a>
+    <a href="teams.html">Teams</a>
+    <a href="attendance.html">Attendance</a>
+    <a href="main-attendance.html">Main Attendance</a>
+    <a href="announcements.html">Announcements</a>
+    <a href="emails.html">Emails</a>
+    <a href="reports.html">Reports</a>
+  </nav>
+  <button class="logout" onclick="logout()">Sign out</button>
+</aside>
+<main class="main">
+<header class="topbar"><div><h1>Dashboard</h1><p>Symposium overview</p></div><div class="user">Administrator</div></header>
+
+<section class="cards">
+  <div class="card"><span>Total Registrations</span><strong id="totalRegistrations">—</strong></div>
+  <div class="card"><span>Day 1</span><strong id="day1">—</strong></div>
+  <div class="card"><span>Day 2</span><strong id="day2">—</strong></div>
+  <div class="card"><span>Both Days</span><strong id="bothDays">—</strong></div>
+  <div class="card"><span>Confirmed</span><strong id="confirmed">—</strong></div>
+  <div class="card"><span>Verified Amount</span><strong id="verifiedAmount">—</strong></div>
+</section>
+
+<section class="grid-2">
+  <div class="panel"><div class="panel-head"><h2>Registration Fees</h2></div><div class="toolbar"><input id="day1Fee" type="number" min="0" step="0.01" placeholder="Day 1 fee"><input id="day2Fee" type="number" min="0" step="0.01" placeholder="Day 2 fee"><button id="saveFees" type="button">Save fees</button></div><p id="feeMessage" class="muted"></p></div>
+  <div class="panel"><div class="panel-head"><h2>Special Events</h2></div><div class="toolbar"><input id="specialCode" placeholder="Code A"><input id="specialName" placeholder="Event name"><input id="specialFee" type="number" min="0" step="0.01" placeholder="High fee"><button id="addSpecialEvent" type="button">Add</button></div><div id="specialEvents" class="stats-list"></div><p id="specialMessage" class="muted"></p></div>
+  <div class="panel"><div class="panel-head"><h2>Payment Status</h2></div><div class="stats-list">
+    <div>Verified <b id="verifiedPayments">—</b></div>
+    <div>Pending <b id="pendingPayments">—</b></div>
+    <div>Under Review <b id="reviewPayments">—</b></div>
+    <div>Rejected <b id="rejectedPayments">—</b></div>
+    <div>Flagged <b id="flaggedPayments">—</b></div>
+  </div></div>
+  <div class="panel"><div class="panel-head"><h2>Quick Actions</h2></div>
+    <div class="quick-actions">
+      <a href="registrations.html">View Registrations</a>
+      <a href="payments.html">Review Payments</a>
+      <a href="coordinators.html">Manage Coordinators</a>
+      <a href="attendance.html">Attendance</a>
+      <a href="main-attendance.html">Main Attendance Scanner</a>
+      <a href="food-tokens.html">Food Tokens</a>
+    </div>
+  </div>
+</section>
+<div id="message"></div>
+</main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/config.js"></script><script src="../js/supabase.js"></script>
+<script src="../js/admin-auth.js"></script><script src="../js/admin-dashboard.js"></script>
+<script>document.getElementById('menuToggle').addEventListener('click',()=>document.querySelector('.sidebar').classList.toggle('menu-open'));</script>
+</body>
+</html>

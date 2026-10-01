@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Main Attendance</title>
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<div class="app"><aside class="sidebar"><div class="logo"><span>CS</span><div>Cyber Sentinel<small>Admin Portal</small></div></div><nav>
+<a href="dashboard.html">Dashboard</a><a href="registrations.html">Registrations</a><a href="payments.html">Payments</a><a href="events.html">Events</a><a href="coordinators.html">Coordinators</a><a href="teams.html">Teams</a><a class="active" href="attendance.html">Attendance</a><a href="main-attendance.html">Main Attendance</a><a href="announcements.html">Announcements</a><a href="emails.html">Emails</a><a href="reports.html">Reports</a></nav><button class="logout" onclick="logout()">Sign out</button></aside>
+<main class="main"><header class="topbar"><div><h1>Main Attendance</h1><p>Scan the verified participant QR for symposium entry.</p></div></header>
+<div class="panel"><div class="toolbar"><select id="attendanceDay"><option value="DAY_1">Day 1 - Technical</option><option value="DAY_2">Day 2 - Non-Technical</option></select><span id="scanMessage">Ready to scan</span></div><div class="toolbar"><input id="registrationId" placeholder="Registration ID (for manual marking)"><button id="lookupRegistration" type="button">Find participant</button></div><div id="reader" style="max-width:520px;margin:20px auto"></div><div id="scanDetails" class="muted">Choose the attendance day and scan a participant QR.</div></div>
+<div id="scanModal" class="scan-modal" hidden><div class="scan-modal-box"><div class="scan-modal-head"><div><small id="scanState">SCAN RESULT</small><h2 id="scanTitle">Participant details</h2></div><button id="closeScanModal" type="button">Close</button></div><div id="scanParticipant" class="scan-participant"></div><div class="scan-modal-actions"><button id="confirmAttendance" type="button">Mark main attendance</button></div></div></div>
+</main></div>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../js/config.js"></script><script src="../js/supabase.js"></script><script src="../js/admin-auth.js"></script><script src="../js/main-attendance.js"></script>
+</body><script src="../js/admin-menu.js"></script>
+</html>
