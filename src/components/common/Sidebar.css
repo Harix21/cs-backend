@@ -1,0 +1,577 @@
+/* ==========================================================================
+   CYBERSENTINEL 2K26 — COMMAND DECK SIDEBAR & SHELL LAYOUT
+   Responsive for Mobile Phones, Tablets, Desktops & Ultra-Wide Monitors
+   ========================================================================== */
+
+:root {
+  --cs-sidebar-w: 260px;
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :root {
+    --cs-sidebar-w: 240px;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --cs-sidebar-w: 275px;
+  }
+}
+
+/* ==========================================================================
+   COMMAND DECK SHELL & MAIN WORKSPACE
+   ========================================================================== */
+.cs-shell {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #060814;
+}
+
+.cs-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-left: 0;
+  transition: margin-left 0.25s ease, width 0.25s ease;
+}
+
+@media (min-width: 1024px) {
+  .cs-main {
+    width: calc(100vw - var(--cs-sidebar-w));
+    margin-left: var(--cs-sidebar-w);
+  }
+}
+
+/* Main inner content container */
+.cs-content {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 16px 14px 44px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .cs-content {
+    padding: 24px 22px 52px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-content {
+    padding: 28px 32px 64px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .cs-content {
+    max-width: 1680px;
+    padding: 34px 42px 76px;
+  }
+}
+
+/* ==========================================================================
+   SIDEBAR CHASSIS & NAVIGATION SYSTEM
+   ========================================================================== */
+.cs-sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  width: var(--cs-sidebar-w) !important;
+  background: #070919 !important;
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(168, 85, 247, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(0, 240, 255, 0.06) 0%, transparent 40%),
+    linear-gradient(180deg, #090c22 0%, #060814 100%) !important;
+  border-right: 1px solid rgba(168, 85, 247, 0.2) !important;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.45) !important;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Circuit grid accent for sidebar interior */
+.cs-sidebar-pattern {
+  background-image: 
+    radial-gradient(rgba(0, 240, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to right, rgba(168, 85, 247, 0.02) 1px, transparent 1px) !important;
+  background-size: 24px 24px !important;
+}
+
+/* Mobile & Tablet Drawer Animation */
+.cs-sidebar-drawer {
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cs-sidebar-drawer.cs-drawer-open {
+  transform: translateX(0);
+}
+
+@media (min-width: 1024px) {
+  .cs-sidebar-drawer {
+    transform: translateX(0) !important;
+  }
+}
+
+/* Mobile Drawer Backdrop */
+.cs-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeInBackdrop 0.2s ease forwards;
+}
+
+@keyframes fadeInBackdrop {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==========================================================================
+   SIDEBAR BRAND BLOCK
+   ========================================================================== */
+.cs-brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 72px;
+  padding: 0 18px;
+  border-bottom: 1px solid rgba(168, 85, 247, 0.22);
+  background: linear-gradient(180deg, rgba(12, 16, 44, 0.92) 0%, rgba(6, 8, 20, 0.35) 100%);
+}
+
+.cs-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.cs-brand-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.55) 0%, rgba(168, 85, 247, 0.55) 100%);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.3), 0 0 24px rgba(168, 85, 247, 0.2);
+}
+
+.cs-brand-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.cs-brand-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.cs-brand-name {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-weight: 900;
+  font-size: 13.5px;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: #ffffff;
+  white-space: nowrap;
+  text-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
+}
+
+.cs-brand-role {
+  margin-top: 3px;
+  font-family: var(--font-mono, monospace);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: #00f0ff;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.45);
+}
+
+.cs-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.cs-icon-button:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.4);
+}
+
+/* ==========================================================================
+   NAVIGATION LIST & ITEMS
+   ========================================================================== */
+.cs-sidebar-nav {
+  flex: 1 1 auto;
+  padding: 16px 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cs-sidebar-nav-group {
+  padding: 0 6px;
+  margin-bottom: 8px;
+  margin-top: 4px;
+  font-family: var(--font-mono, monospace);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.cs-sidebar-nav-item {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 13px !important;
+  border-radius: 10px !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.015em !important;
+  color: #94a3b8 !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  user-select: none !important;
+  box-sizing: border-box !important;
+}
+
+.cs-sidebar-nav-item .cs-nav-icon {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+  color: #64748b !important;
+  transition: all 0.2s ease-out !important;
+}
+
+/* Inactive Hover State */
+.cs-sidebar-nav-item:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #f1f5f9 !important;
+  border-color: rgba(0, 240, 255, 0.25) !important;
+  transform: translateX(2px) !important;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.08) !important;
+}
+
+.cs-sidebar-nav-item:hover:not(.active) .cs-nav-icon {
+  color: #00f0ff !important;
+  filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.5)) !important;
+}
+
+/* Active State with Cyan Glow & Indicator Bar */
+.cs-sidebar-nav-item.active {
+  background: linear-gradient(100deg, rgba(124, 58, 237, 0.26) 0%, rgba(168, 85, 247, 0.18) 55%, rgba(0, 240, 255, 0.08) 100%) !important;
+  border: 1px solid rgba(0, 240, 255, 0.4) !important;
+  box-shadow:
+    0 0 16px rgba(168, 85, 247, 0.24),
+    0 0 30px rgba(236, 72, 153, 0.1),
+    inset 0 0 12px rgba(0, 240, 255, 0.06) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.cs-sidebar-nav-item.active .cs-nav-icon {
+  color: #00f0ff !important;
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.75)) !important;
+}
+
+.cs-sidebar-nav-item.active::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 3.5px !important;
+  height: 20px !important;
+  border-radius: 0 4px 4px 0 !important;
+  background: #00f0ff !important;
+  box-shadow: 0 0 10px #00f0ff, 0 0 14px rgba(0, 240, 255, 0.8) !important;
+}
+
+/* Danger / Logout Navigation Item */
+.cs-nav-danger:hover {
+  background: rgba(244, 63, 94, 0.12) !important;
+  border-color: rgba(244, 63, 94, 0.35) !important;
+  color: #fb7185 !important;
+}
+
+.cs-nav-danger:hover .cs-nav-icon {
+  color: #f43f5e !important;
+  filter: drop-shadow(0 0 6px rgba(244, 63, 94, 0.6)) !important;
+}
+
+/* Sidebar Footer & Identity Block */
+.cs-sidebar-footer {
+  position: relative;
+  padding: 12px 14px;
+  border-top: 1px solid rgba(168, 85, 247, 0.18);
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.cs-coord-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cs-coord-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00f0ff, #7c3aed);
+  color: #040814;
+  font-weight: 900;
+  font-size: 13px;
+  font-family: var(--font-heading, sans-serif);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   TOPBAR RESPONSIVENESS (COMMAND DECK HEADER)
+   ========================================================================== */
+.cs-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+  background: linear-gradient(180deg, rgba(7, 9, 25, 0.95) 0%, rgba(7, 9, 25, 0.85) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .cs-topbar {
+    min-height: 72px;
+    padding: 12px 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-topbar {
+    padding: 12px 32px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .cs-topbar {
+    min-height: 76px;
+    padding: 14px 44px;
+  }
+}
+
+.cs-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.cs-topbar-center {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .cs-topbar-center {
+    display: flex;
+  }
+}
+
+.cs-topbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .cs-topbar-right {
+    gap: 12px;
+  }
+}
+
+/* Command Node Live Indicator */
+.cs-command-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  background: linear-gradient(135deg, rgba(8, 47, 73, 0.55), rgba(49, 46, 129, 0.35));
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.12);
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a5f3fc;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .cs-command-node {
+    padding: 8px 14px;
+    font-size: 11.5px;
+    border-radius: 12px;
+  }
+}
+
+.cs-pulse-dot {
+  position: relative;
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+}
+
+.cs-pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #00f0ff;
+  opacity: 0.75;
+  animation: csPulsePing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.cs-pulse-dot::after {
+  content: '';
+  position: relative;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00f0ff;
+  box-shadow: 0 0 8px #00f0ff;
+}
+
+@keyframes csPulsePing {
+  0% { transform: scale(1); opacity: 0.75; }
+  70% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Secure Access Badge */
+.cs-secure-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.24) 0%, rgba(0, 240, 255, 0.1) 100%);
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.24);
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e9d5ff;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .cs-secure-badge {
+    padding: 7px 14px;
+    font-size: 11px;
+  }
+}
+
+/* Event Title in Topbar */
+.cs-event-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 6px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  background: linear-gradient(180deg, rgba(10, 13, 36, 0.85), rgba(8, 10, 28, 0.45));
+}
+
+.cs-event-title-text {
+  font-family: var(--font-heading, sans-serif);
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 1.1;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: linear-gradient(90deg, #00f0ff 0%, #67e8f9 30%, #c084fc 70%, #f472b6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 1280px) {
+  .cs-event-title-text {
+    font-size: 17px;
+  }
+}

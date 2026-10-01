@@ -1,0 +1,176 @@
+/* ==========================================================================
+   CYBERSENTINEL 2K26 — ADMIN DASHBOARD RESPONSIVE STYLES
+   Mobiles, Tablets, Desktops, and Ultra-Wide Monitors
+   ========================================================================== */
+
+/* Dashboard Header Row */
+.admin-dashboard-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  .admin-dashboard-header {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Stat Cards Responsiveness */
+.admin-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-stats-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .admin-stats-grid {
+    gap: 24px;
+  }
+}
+
+/* Stat Card Base */
+.cyber-card-purple,
+.cyber-card-emerald,
+.cyber-card-amber,
+.cyber-card-pink {
+  position: relative;
+  border-radius: 18px;
+  padding: 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.22s ease;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .cyber-card-purple,
+  .cyber-card-emerald,
+  .cyber-card-amber,
+  .cyber-card-pink {
+    padding: 24px;
+    border-radius: 20px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .cyber-card-purple,
+  .cyber-card-emerald,
+  .cyber-card-amber,
+  .cyber-card-pink {
+    padding: 28px;
+    border-radius: 22px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cyber-card-purple:hover,
+  .cyber-card-emerald:hover,
+  .cyber-card-amber:hover,
+  .cyber-card-pink:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* Charts Grid */
+.admin-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 1024px) {
+  .admin-charts-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .admin-charts-grid {
+    gap: 28px;
+  }
+}
+
+/* Chart Cards */
+.cyber-chart-card {
+  background: rgba(11, 15, 38, 0.88);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(124, 58, 237, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .cyber-chart-card {
+    border-radius: 20px;
+    padding: 24px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .cyber-chart-card {
+    border-radius: 22px;
+    padding: 28px;
+  }
+}
+
+/* Table Responsive Scrolling Container */
+.cyber-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 14px;
+}
+
+.cyber-table-scroll table {
+  min-width: 600px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .cyber-table-scroll table {
+    min-width: 100%;
+  }
+}
+
+/* Settings Form Grid on Dashboard */
+.admin-settings-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .admin-settings-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .admin-settings-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+}

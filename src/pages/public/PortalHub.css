@@ -1,0 +1,245 @@
+/* ==========================================================================
+   CYBERSENTINEL 2K26 — PORTAL HUB RESPONSIVE STYLES
+   Optimized for Small Phones, Tablets, Laptops & Ultra-Wide Displays
+   STRICT ZERO-OVERFLOW / ZERO-SLIDING ON MOBILE
+   ========================================================================== */
+
+/* Hardware Accelerated Futuristic Background Plate (Zero Viewport Spanning) */
+.cyber-fixed-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(0, 240, 255, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(244, 63, 94, 0.04) 0%, transparent 55%),
+    linear-gradient(180deg, #040816 0%, #060a1e 50%, #030612 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Central Portal Container with Fluid Margin & Width */
+.portal-container {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+  overflow-x: hidden;
+}
+
+@media (min-width: 640px) {
+  .portal-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portal-container {
+    width: min(100% - 48px, 1440px);
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 1536px) {
+  .portal-container {
+    max-width: 1620px;
+    width: min(100% - 64px, 1620px);
+  }
+}
+
+/* Strict Cards Grid System */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (min-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 30px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .cards-grid {
+    gap: 32px 36px;
+  }
+}
+
+/* Responsive Portal Card */
+.portal-card {
+  position: relative;
+  min-height: auto;
+  padding: 20px 18px;
+  box-sizing: border-box;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+@media (min-width: 640px) {
+  .portal-card {
+    padding: 26px 28px;
+    gap: 22px;
+    border-radius: 20px;
+    min-height: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portal-card {
+    padding: 28px 32px;
+    gap: 24px;
+    min-height: 220px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .portal-card {
+    padding: 34px 38px;
+    gap: 28px;
+    min-height: 235px;
+    border-radius: 24px;
+  }
+}
+
+/* Hover and Active feedback */
+@media (hover: hover) and (pointer: fine) {
+  .portal-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+.portal-card:active {
+  transform: translateY(-1px);
+}
+
+/* Node Icon Box */
+.card-icon-box {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  margin-top: 2px;
+  transition: transform 0.22s ease;
+}
+
+@media (min-width: 640px) {
+  .card-icon-box {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    border-radius: 16px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .card-icon-box {
+    width: 66px;
+    height: 66px;
+    min-width: 66px;
+    border-radius: 18px;
+  }
+}
+
+/* Card Content Column */
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+  z-index: 2;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+/* Background Watermark Numeral */
+.card-numeral {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-family: var(--font-cyber, 'Orbitron', monospace);
+  font-size: 1.6rem;
+  font-weight: 900;
+  user-select: none;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 640px) {
+  .card-numeral {
+    top: 20px;
+    right: 28px;
+    font-size: 2.2rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .card-numeral {
+    top: 24px;
+    right: 34px;
+    font-size: 2.6rem;
+  }
+}
+
+/* Extra Small Phones (<=420px): Compact spacing */
+@media (max-width: 420px) {
+  .portal-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .portal-card {
+    padding: 16px 14px;
+    gap: 12px;
+    border-radius: 16px;
+  }
+  .card-icon-box {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 12px;
+  }
+  .card-numeral {
+    font-size: 1.35rem;
+    top: 12px;
+    right: 12px;
+  }
+}

@@ -1,0 +1,537 @@
+/* ========================================================
+   CYBER SENTINEL 2K26 — SCI-FI HUD AUTHENTICATION STYLES
+   Exact reference match on desktop, with zero-overflow fluid
+   responsiveness for mobile, tablet, desktop, and large monitors.
+   ======================================================== */
+
+.cyber-login-container {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #060515;
+  background-image: url('/assets/cyberpunk_city_bg.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  overflow-x: hidden !important;
+  overflow-y: auto;
+  padding: 40px 24px;
+  box-sizing: border-box;
+}
+
+.cyber-login-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at 80% 50%, rgba(13, 9, 36, 0.25) 0%, rgba(6, 5, 20, 0.55) 100%),
+    linear-gradient(to bottom, rgba(6, 5, 20, 0.15) 0%, rgba(6, 5, 20, 0.45) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Two-column layout container */
+.cyber-login-layout {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 56px;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+/* Left Side: Brand Hero matching exact uploaded reference */
+.cyber-login-brand {
+  flex: 1 1 0%;
+  max-width: 520px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+/* Hero Branding Components */
+.cyber-login-crest {
+  width: 215px !important;
+  height: 215px !important;
+  border-radius: 50% !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #09071c !important;
+  border: 3px solid #ec4899 !important;
+  box-shadow: 0 0 35px rgba(236, 72, 153, 0.65), inset 0 0 15px rgba(236, 72, 153, 0.3) !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  transition: width 0.25s ease, height 0.25s ease !important;
+}
+
+.cyber-login-crest.is-coordinator {
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.65), inset 0 0 15px rgba(168, 85, 247, 0.3) !important;
+}
+
+.cyber-login-title {
+  font-size: 44px !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.04em !important;
+  color: #ffffff !important;
+  text-transform: uppercase !important;
+  line-height: 1.1 !important;
+  font-family: var(--font-heading) !important;
+  text-shadow: 0 0 25px rgba(0, 240, 255, 0.4), 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+  transition: font-size 0.25s ease !important;
+  word-break: normal !important;
+  max-width: 100% !important;
+}
+
+.cyber-login-subtitle {
+  font-size: 17px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  color: #00f0ff;
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.7);
+  margin: 0;
+  transition: font-size 0.25s ease;
+  max-width: 100%;
+}
+
+/* Event Badge on Left Column */
+.cyber-event-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 20px;
+  border-radius: 16px;
+  background: rgba(12, 15, 36, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 255, 0.1);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Right Side: SCI-FI HUD CARD Column & Wrapper */
+.cyber-hud-card-col {
+  flex: 1 1 0%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+}
+
+.cyber-hud-card-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  box-sizing: border-box;
+  filter: drop-shadow(0 0 25px rgba(0, 240, 255, 0.25)) drop-shadow(0 0 50px rgba(236, 72, 153, 0.2));
+}
+
+.cyber-hud-form-body {
+  position: relative;
+  z-index: 2;
+  padding: 48px 40px 38px 40px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.cyber-auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #94a3b8;
+  padding-top: 2px;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* SCI-FI HUD CARD (Matches exact reference image) */
+.hud-login-card {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  background: rgba(14, 11, 36, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1.5px solid rgba(0, 240, 255, 0.5);
+  border-radius: 28px;
+  padding: 46px 42px;
+  box-shadow: 
+    0 0 35px rgba(0, 240, 255, 0.25),
+    0 0 70px rgba(168, 85, 247, 0.2),
+    inset 0 0 30px rgba(168, 85, 247, 0.08);
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Sci-fi HUD Corner Accents */
+.hud-corner-tl {
+  position: absolute;
+  top: -2px;
+  left: 28px;
+  width: 75px;
+  height: 4px;
+  background: linear-gradient(90deg, #00f0ff, #a855f7);
+  box-shadow: 0 0 12px #00f0ff, 0 0 20px #a855f7;
+  border-radius: 2px;
+}
+
+.hud-corner-tr {
+  position: absolute;
+  top: -2px;
+  right: 28px;
+  width: 35px;
+  height: 4px;
+  background: #ec4899;
+  box-shadow: 0 0 12px #ec4899;
+  border-radius: 2px;
+}
+
+.hud-corner-br {
+  position: absolute;
+  bottom: -2px;
+  right: 28px;
+  width: 75px;
+  height: 4px;
+  background: linear-gradient(90deg, #a855f7, #ec4899);
+  box-shadow: 0 0 14px #ec4899;
+  border-radius: 2px;
+}
+
+.hud-bracket-left {
+  position: absolute;
+  left: -2px;
+  top: 45px;
+  width: 4px;
+  height: 55px;
+  background: #00f0ff;
+  box-shadow: 0 0 12px #00f0ff;
+  border-radius: 2px;
+}
+
+.hud-bracket-right {
+  position: absolute;
+  right: -2px;
+  bottom: 55px;
+  width: 4px;
+  height: 65px;
+  background: #ec4899;
+  box-shadow: 0 0 12px #ec4899;
+  border-radius: 2px;
+}
+
+/* Custom Cyber Login Inputs */
+.cyber-login-input {
+  width: 100%;
+  height: 54px;
+  background: rgba(18, 14, 42, 0.9) !important;
+  border: 1.5px solid rgba(88, 70, 140, 0.6) !important;
+  border-radius: 14px !important;
+  padding: 0 18px 0 46px !important;
+  color: #ffffff !important;
+  font-size: 15px !important;
+  transition: all 0.2s ease !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+.cyber-login-input:focus {
+  border-color: #00f0ff !important;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.4) !important;
+  background: rgba(22, 17, 52, 0.95) !important;
+}
+
+.cyber-login-input::placeholder {
+  color: #64748b !important;
+  font-size: 14px !important;
+}
+
+/* Glowing Capsule Action Button */
+.cyber-login-btn {
+  width: 100%;
+  height: 54px;
+  background: linear-gradient(90deg, #00f0ff 0%, #38bdf8 30%, #a855f7 70%, #ec4899 100%) !important;
+  border-radius: 9999px !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-family: var(--font-heading) !important;
+  font-size: 15.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.12em !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  cursor: pointer !important;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.5), 0 0 45px rgba(236, 72, 153, 0.3) !important;
+  transition: all 0.25s ease !important;
+  text-transform: uppercase !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+.cyber-login-btn:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.75), 0 0 60px rgba(236, 72, 153, 0.5) !important;
+  filter: brightness(1.1) !important;
+}
+
+.cyber-login-btn:active:not(:disabled) {
+  transform: translateY(0) !important;
+}
+
+.cyber-login-btn:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  filter: grayscale(0.5) !important;
+}
+
+/* Cyber Stat Cards */
+.cyber-card-purple,
+.cyber-card-emerald,
+.cyber-card-amber,
+.cyber-card-pink {
+  position: relative;
+  background: rgba(14, 11, 36, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 22px 24px;
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(124, 58, 237, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.cyber-card-purple:hover {
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 15px 35px rgba(168, 85, 247, 0.2), inset 0 0 25px rgba(168, 85, 247, 0.1);
+  transform: translateY(-3px);
+}
+
+.cyber-card-emerald:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 15px 35px rgba(16, 185, 129, 0.2), inset 0 0 25px rgba(16, 185, 129, 0.1);
+  transform: translateY(-3px);
+}
+
+.cyber-card-amber:hover {
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2), inset 0 0 25px rgba(245, 158, 11, 0.1);
+  transform: translateY(-3px);
+}
+
+.cyber-card-pink:hover {
+  border-color: rgba(236, 72, 153, 0.5);
+  box-shadow: 0 15px 35px rgba(236, 72, 153, 0.2), inset 0 0 25px rgba(236, 72, 153, 0.1);
+  transform: translateY(-3px);
+}
+
+/* Cyber Data Table */
+.cyber-table-container {
+  background: rgba(12, 10, 32, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+}
+
+.cyber-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.cyber-table th {
+  background: rgba(18, 14, 46, 0.95);
+  color: #cbd5e1;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 16px 20px;
+  border-bottom: 1.5px solid rgba(139, 92, 246, 0.3);
+  white-space: nowrap;
+}
+
+.cyber-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #f1f5f9;
+  font-size: 14px;
+}
+
+.cyber-table tr:hover td {
+  background: rgba(0, 240, 255, 0.03);
+}
+
+/* ========================================================
+   RESPONSIVE BREAKPOINTS (STRICT NO-SLIDE SYSTEM)
+   ======================================================== */
+
+/* Large Monitors (>= 1440px) */
+@media (min-width: 1440px) {
+  .cyber-login-container {
+    padding: 60px 40px;
+  }
+  .cyber-login-layout {
+    max-width: 1340px;
+    gap: 72px;
+  }
+}
+
+/* Tablets & Small Laptops (641px - 1023px) */
+@media (max-width: 1023px) {
+  .cyber-login-container {
+    padding: 32px 16px;
+  }
+  .cyber-login-layout {
+    flex-direction: column !important;
+    gap: 32px !important;
+    padding: 12px 6px !important;
+    align-items: center !important;
+  }
+  .cyber-login-brand {
+    max-width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px !important;
+  }
+  .cyber-login-crest {
+    width: 165px !important;
+    height: 165px !important;
+  }
+  .cyber-login-title {
+    font-size: 34px !important;
+  }
+  .cyber-hud-form-body {
+    padding: 38px 30px 30px 30px !important;
+  }
+}
+
+/* Mobile Devices (<= 640px) - STRICT 0-OVERFLOW */
+@media (max-width: 640px) {
+  .cyber-login-container {
+    padding: 20px 12px !important;
+    overflow-x: hidden !important;
+  }
+  .cyber-login-layout {
+    flex-direction: column !important;
+    gap: 22px !important;
+    padding: 6px 0 !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  .cyber-login-brand {
+    max-width: 100% !important;
+    width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 16px !important;
+    padding: 0 4px !important;
+  }
+  .cyber-login-crest {
+    width: 125px !important;
+    height: 125px !important;
+  }
+  .cyber-login-title {
+    font-size: clamp(22px, 6.2vw, 28px) !important;
+    line-height: 1.15 !important;
+  }
+  .cyber-login-subtitle {
+    font-size: 13.5px !important;
+    letter-spacing: 0.04em !important;
+  }
+  .cyber-event-badge {
+    padding: 10px 14px !important;
+    gap: 10px !important;
+    max-width: 100% !important;
+  }
+  .cyber-hud-card-col {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .cyber-hud-card-wrapper {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .cyber-hud-form-body {
+    padding: 32px 18px 24px 18px !important;
+    width: 100% !important;
+  }
+  .cyber-login-input {
+    height: 48px !important;
+    font-size: 14px !important;
+    padding: 0 14px 0 40px !important;
+  }
+  .cyber-login-btn {
+    height: 48px !important;
+    font-size: 14px !important;
+  }
+  .cyber-auth-row {
+    font-size: 12px !important;
+    gap: 6px !important;
+  }
+  .hud-corner-tl { width: 45px; left: 14px; }
+  .hud-corner-tr { width: 22px; right: 14px; }
+  .hud-corner-br { width: 45px; right: 14px; }
+  .hud-bracket-left { height: 30px; top: 25px; }
+  .hud-bracket-right { height: 35px; bottom: 30px; }
+}
+
+/* Extra Small Mobile Devices (<= 380px) */
+@media (max-width: 380px) {
+  .cyber-login-container {
+    padding: 16px 8px !important;
+  }
+  .cyber-login-crest {
+    width: 105px !important;
+    height: 105px !important;
+  }
+  .cyber-login-title {
+    font-size: 22px !important;
+  }
+  .cyber-login-subtitle {
+    font-size: 12px !important;
+  }
+  .cyber-hud-form-body {
+    padding: 26px 12px 20px 12px !important;
+  }
+  .cyber-auth-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+  }
+}

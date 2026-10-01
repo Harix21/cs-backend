@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Login | Cyber Sentinel</title>
+<link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="login-page">
+<div class="login-card">
+  <div class="brand">• CYBERSENTINEL 2K26</div>
+  <h1>Admin Portal</h1>
+  <p>CyberSentinel2k26 Command Center</p>
+  <form id="loginForm">
+    <label>Email</label>
+    <input id="email" type="email" required placeholder="admin@example.com">
+    <label>Password</label>
+    <input id="password" type="password" required placeholder="••••••••">
+    <button type="submit">Sign In</button>
+    <div id="message"></div>
+  </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/config.js"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/admin-auth.js"></script>
+</body>
+</html>

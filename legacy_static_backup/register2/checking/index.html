@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber Sentinel — Check Registration</title><link rel="stylesheet" href="../css/portal.css"></head><body>
+<header class="topbar"><div class="brand"><div class="logo">CS</div>Cyber Sentinel</div><span class="pill">Check Registration</span></header>
+<main class="container">
+<section class="hero"><span class="pill">SECURE CONFIRMATION</span><h1>Check Your Registration</h1>
+<p>Enter the email and phone number used during registration. No Registration ID is required.</p></section>
+<div id="alert" class="alert"></div>
+<form id="lookupForm" class="card">
+<div class="grid"><div><label>Email *</label><input id="email" type="email" required></div>
+<div><label>Phone Number *</label><input id="phone" inputmode="tel" required></div></div>
+<div class="actions"><button class="btn btn-primary" id="checkBtn">Check Registration</button><a class="btn btn-secondary" href="../registration/index.html">New Registration</a></div>
+<p class="notice">For production, an email OTP can be added through Supabase Auth or an external email provider. The current secure lookup requires both registered email and phone.</p>
+</form>
+<section class="card team-tools"><div class="section-heading"><div><span class="pill">TEAM MANAGEMENT</span><h2>Create or join a team</h2></div><p class="notice">After checking your registration, choose a dedicated team flow.</p></div><div class="actions"><a class="btn btn-primary" href="../team/create.html">Create a team</a><a class="btn btn-secondary" href="../team/join.html">Join a friend's team</a></div></section>
+<section id="result" class="card hidden" style="margin-top:20px">
+<div id="printArea"><div class="result-head"><div><span class="pill">REGISTRATION RECORD</span><h2 id="name">—</h2><p class="notice">Registration ID: <strong id="code">—</strong></p></div><div id="paymentStatus"></div></div>
+<div class="details"><div class="detail"><small>College</small><strong id="college">—</strong></div><div class="detail"><small>Department</small><strong id="department">—</strong></div>
+<div class="detail"><small>Registered Days</small><strong id="days">—</strong></div><div class="detail"><small>Registration Status</small><strong id="regStatus">—</strong></div>
+<div class="detail"><small>UTR</small><strong id="utr">—</strong></div><div class="detail"><small>Payment Amount</small><strong id="amount">—</strong></div></div>
+<div id="teamArea"></div>
+<section id="qrSection" class="qr-card hidden"><h2>Official Entry QR</h2><p class="notice">This QR contains only a secure token/verification URL. Show it to Admin or the relevant event coordinator.</p><div id="qrcode"></div>
+<div class="actions" style="justify-content:center"><button id="downloadQr" class="btn btn-primary">Download QR</button></div></section>
+</div><div class="actions"><button id="printBtn" class="btn btn-secondary">Print Confirmation</button><button id="downloadBtn" class="btn btn-secondary">Download Confirmation</button></div>
+</section></main><footer>Cyber Sentinel CS Symposium • Your QR appears only after payment verification</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="../js/config.js"></script><script src="../js/feedback.js"></script><script src="../js/checking.js"></script></body></html>

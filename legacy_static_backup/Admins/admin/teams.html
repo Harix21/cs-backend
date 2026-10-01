@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teams</title>
+<link rel="stylesheet" href="../css/admin.css">
+<style>
+.modal{position:fixed;inset:0;background:rgba(15,23,42,.52);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.show{display:flex}.modal-card{width:min(640px,100%);background:#fff;border-radius:14px;padding:22px;box-shadow:0 24px 70px rgba(15,23,42,.22)}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.close-btn{border:none;background:#f3f4f6;border-radius:8px;padding:8px 12px;cursor:pointer}.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field input,.field select{padding:10px 12px;border:1px solid #dfe5f1;border-radius:8px;font:inherit}.action-row{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}.primary-btn,.secondary-btn{border:none;border-radius:8px;padding:10px 14px;cursor:pointer;font-weight:600}.primary-btn{background:#0f172a;color:#fff}.secondary-btn{background:#e5e7eb;color:#111827}.warning{color:#b42318;font-weight:600}.success{color:#0f766e;font-weight:600}.info{color:#1d4ed8;font-weight:600}</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar"><div class="logo"><span>2K26</span><div>CyberSentinel2k26<small>Admin Portal</small></div></div><nav>
+<a href="dashboard.html">Dashboard</a><a href="registrations.html">Registrations</a><a href="payments.html">Payments</a><a href="events.html">Events</a><a href="coordinators.html">Coordinators</a><a class="active" href="teams.html">Teams</a><a href="attendance.html">Attendance</a><a href="announcements.html">Announcements</a><a href="emails.html">Emails</a><a href="reports.html">Reports</a></nav><button class="logout" onclick="logout()">Sign out</button></aside>
+<main class="main">
+<header class="topbar"><div><h1>Teams</h1><p>View team leaders, members and status</p></div><button class="primary-btn" id="openTeamModal">Add Team</button></header>
+<div class="panel table-wrap"><table><thead><tr><th>Team Code</th><th>Team</th><th>Event</th><th>Leader</th><th>Members</th><th>Limit</th><th>Status</th><th>Details</th></tr></thead><tbody id="teamRows"></tbody></table></div>
+</main>
+</div>
+<div id="teamModal" class="modal">
+  <div class="modal-card">
+    <div class="modal-head"><h2 style="margin:0">Add Team</h2><button type="button" class="close-btn" data-close="teamModal">Close</button></div>
+    <form id="teamForm">
+      <div class="form-grid">
+        <div class="field"><label for="teamEvent">Event</label><select id="teamEvent" name="event_id" required></select></div>
+        <div class="field"><label for="teamName">Team Name</label><input id="teamName" name="team_name" type="text" required></div>
+        <div class="field"><label for="teamLeader">Leader CS ID (optional)</label><input id="teamLeader" name="leader_registration_id" type="text" placeholder="CS-1256"></div>
+        <div class="field"><label for="teamMaxMembers">Max Members</label><input id="teamMaxMembers" name="max_members" type="number" min="2" value="2" required></div>
+      </div>
+      <div class="action-row"><button type="button" class="secondary-btn" data-close="teamModal">Cancel</button><button type="submit" class="primary-btn">Add Team</button></div>
+    </form>
+    <div id="teamMessage" class="success" style="margin-top:14px"></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../js/config.js"></script><script src="../js/supabase.js"></script><script src="../js/admin-auth.js"></script><script src="../js/view-details.js"></script>
+<script>
+async function loadEventsForSelect(){
+  const {data,error}=await supabaseClient.from('events').select('id,name,code').order('name');
+  const select=document.getElementById('teamEvent');
+  if(!select)return;
+  if(error){select.innerHTML='<option value="">'+esc(error.message)+'</option>';return;}
+  select.innerHTML='<option value="">Select an event</option>'+(data||[]).map(e=>'<option value="'+e.id+'">'+esc(e.code)+' - '+esc(e.name)+'</option>').join('');
+}
+async function loadTeams(){
+  const {data,error}=await supabaseClient.from('team_summary').select('*').order('event_name').order('team_name');
+  const b=document.getElementById('teamRows');
+  if(error){b.innerHTML='<tr><td colspan="8">'+esc(error.message)+'</td></tr>';return;}
+  const teams=await Promise.all((data||[]).map(async t=>{const {data:members}=await supabaseClient.from('team_members').select('member_role,registrations(registration_code,participants(name))').eq('team_id',t.id);return {...t,team_members:(members||[]).map(m=>({role:m.member_role,cs_id:m.registrations?.registration_code,name:m.registrations?.participants?.name}))};}));
+  b.innerHTML=teams.map(t=>{storeDetails('team',t.id,t);return '<tr><td>'+esc(t.team_code)+'</td><td>'+esc(t.team_name)+'</td><td>'+esc(t.event_name)+'</td><td>'+esc(t.team_leader_registration_code||'—')+'</td><td>'+t.current_members+'</td><td>'+t.max_members+'</td><td>'+esc(t.status)+'</td><td><button class="view-team" data-id="'+esc(t.id)+'">View</button></td></tr>';}).join('')||'<tr><td colspan="8">No teams found.</td></tr>';
+}
+document.getElementById('teamRows').addEventListener('click',event=>{const button=event.target.closest('.view-team');if(button)viewDetails('team',button.dataset.id,'Team details');});
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function setMessage(elId,text,type='success'){const el=document.getElementById(elId);if(!el)return;el.textContent=text;el.className=type==='error'?'warning':type==='info'?'info':'success';}
+function openModal(id){document.getElementById(id).classList.add('show');}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.getElementById('openTeamModal').addEventListener('click',()=>openModal('teamModal'));
+document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>closeModal(btn.getAttribute('data-close'))));
+document.getElementById('teamForm')?.addEventListener('submit',async function(event){
+  event.preventDefault();
+  const form=event.currentTarget;
+  const fd=new FormData(form);
+  const eventId=(fd.get('event_id')||'').toString();
+  const teamName=(fd.get('team_name')||'').toString().trim();
+  const maxMembers=Number((fd.get('max_members')||2).toString() || 2);
+  const leaderRegistrationId=(fd.get('leader_registration_id')||'').toString().trim();
+  if(!eventId||!teamName){setMessage('teamMessage','Please choose an event and team name.','error');return;}
+  if(maxMembers<2){setMessage('teamMessage','Team max members must be at least 2.','error');return;}
+  try{
+    const {data:eventData,error:eventError}=await supabaseClient.from('events').select('code').eq('id',eventId).single();
+    if(eventError) throw eventError;
+    let leaderId=null;
+    if(leaderRegistrationId){
+      let leaderQuery=supabaseClient.from('registrations').select('id,registration_code,status,payments(status)').eq('registration_code',leaderRegistrationId.toUpperCase()).maybeSingle();
+      let {data:leader,error:leaderError}=await leaderQuery;
+      if(leaderError||!leader){const fallback=await supabaseClient.from('registrations').select('id,registration_code,status,payments(status)').eq('id',leaderRegistrationId).maybeSingle();leader=fallback.data;leaderError=fallback.error;}
+      if(leaderError||!leader) throw new Error('user not found');
+      if(leader.status!=='CONFIRMED'||leader.payments?.status!=='VERIFIED') throw new Error('leader not yet verified');
+      const {data:existing}=await supabaseClient.from('team_members').select('id,event_teams!inner(event_id)').eq('registration_id',leader.id).eq('event_teams.event_id',eventId).maybeSingle();
+      if(existing) throw new Error('leader already in team for the same event');
+      leaderId=leader.id;
+    }
+    const {data:teamCode,error:codeError}=await supabaseClient.rpc('generate_team_code',{p_event_code:eventData.code});
+    if(codeError) throw codeError;
+    const {data:teamInsertData,error:insertError}=await supabaseClient.from('event_teams').insert([{event_id:eventId,team_code:teamCode,team_name:teamName,leader_registration_id:leaderId,max_members:maxMembers,status:'OPEN'}]).select();
+    if(insertError) throw insertError;
+    const createdTeam=teamInsertData && teamInsertData[0];
+    if(leaderId && createdTeam){
+      const {error:memberError}=await supabaseClient.from('team_members').insert([{team_id:createdTeam.id,registration_id:leaderId,member_role:'LEADER'}]);
+      if(memberError) throw memberError;
+    }
+    form.reset();
+    closeModal('teamModal');
+    setMessage('teamMessage','Team added successfully.','success');
+    await loadTeams();
+  }catch(err){setMessage('teamMessage',err.message||'Unable to add team.','error');}
+});
+loadEventsForSelect();
+loadTeams();
+</script>
+</body><script src="../js/admin-menu.js"></script>
+</html>
+
